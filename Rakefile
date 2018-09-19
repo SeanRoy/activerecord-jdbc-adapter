@@ -237,6 +237,7 @@ if defined? JRUBY_VERSION
 
     classpath = []
     [ 'java.class.path', 'sun.boot.class.path' ].map { |key| ENV_JAVA[key] }.each do |v|
+      next if ENV_JAVA[key].empty?
       classpath += v.split(File::PATH_SEPARATOR).find_all { |jar| jar =~ /jruby/i } if v
     end
     # Using Java 9+.  Let's try and infer jruby.jar location from rbconfig
